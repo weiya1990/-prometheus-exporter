@@ -36,4 +36,5 @@ kubectl apply -f k8s/deploy.yaml
 kubectl apply -f k8s/service.yaml
 kubectl apply -f k8s/servicemonitor.yaml
 ```
-
+![image](https://user-images.githubusercontent.com/38902618/130164415-f94de001-8a32-4bfe-9b39-0eda5bf2e8bc.png)
+![image](https://user-images.githubusercontent.com/38902618/130164470-26879c22-e98b-46c4-98e4-bcc8227d62d0.png)
