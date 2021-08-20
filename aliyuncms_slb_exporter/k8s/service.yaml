@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: aliyuncms-slb-exporter-svc
+  namespace: monitoring
+  labels:
+    app: aliyun-service
+spec:
+  ports:
+    - name: aliyun-service-port
+      protocol: TCP
+      port: 8005
+      targetPort: 8005
+  selector:
+    app: aliyuncms-slb-exporter
+  type: ClusterIP

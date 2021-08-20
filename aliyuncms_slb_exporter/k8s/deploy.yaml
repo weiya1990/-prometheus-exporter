@@ -1,0 +1,52 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: aliyuncms-slb-exporter
+  namespace: monitoring
+  labels:
+    app: aliyuncms-slb-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aliyuncms-slb-exporter
+  template:
+    metadata:
+      labels:
+        app: aliyuncms-slb-exporter
+    spec:
+      containers:
+        - name: aliyuncms-slb-exporter
+          image: >-
+            registry.cn-hangzhou.aliyuncs.com/saas-open/aliyuncms_slb_exporter:v1
+          ports:
+            - name: port-8005
+              containerPort: 8005
+              protocol: TCP
+          env:
+            - name: MetricName_list
+              value: >-
+                ActiveConnection,TrafficTXNew,TrafficRXNew,DropPacketRX,DropPacketTX,InactiveConnection,MaxConnection,PacketRX,PacketTX
+            - name: slb_region
+              value: cn-shanghai
+            - name: slb_domain
+              value: metrics.cn-shanghai.aliyuncs.com
+            - name: slb_instance_list
+              value: lb-uf68g5onvgac412fctrl9
+            - name: slb_port_list
+              value: '80,443'
+            - name: aliyun_ak
+              value: xxxxx
+            - name: aliyun_sk
+              value: xxxxxx
+            - name: interval
+              value: '10'
+          resources:
+            limits:
+              cpu: 250m
+              memory: 150Mi
+            requests:
+              cpu: 250m
+              memory: 50Mi
+          imagePullPolicy: Always
+      restartPolicy: Always
